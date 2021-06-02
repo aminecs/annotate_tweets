@@ -4,6 +4,6 @@ A simple python script which takes a file which has a list of tweet ids and allo
 
 Since Twitter only allows 100 tweets per request, you have to specify the start index from which you want to start parsing your original file after every 100 id. This script will also drop any unavailable id.
 
-Inputs: File name and start index (0,100, 200...etc)
+Inputs: File name and start index (0,100, 200, 300...etc)
 
 Don't forget to set your API keys in your environment before launching this script.
