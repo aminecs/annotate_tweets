@@ -30,7 +30,10 @@ def annotate_tweets(tweet_ids, event_name, start_index, api):
                 annotation = input("Try again: ")
             curr_tweet["annotation"] = annotation
             curr_tweet["tweet_id"] = tweet.id_str
-            curr_tweet["text"] = tweet.text
+            if hasattr(tweet, "retweeted_status"):
+                curr_tweet["text"] = tweet.retweeted_status.text
+            else:
+                curr_tweet["text"] = tweet.text
             curr_tweet["name"] = tweet.author.name
             curr_tweet["screen_name"] = tweet.author.screen_name
             curr_tweet["profile_img"] = tweet.author.profile_image_url_https
