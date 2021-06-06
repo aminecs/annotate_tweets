@@ -1,5 +1,6 @@
 import tweepy, os
 from dotenv import load_dotenv
+import json
 
 load_dotenv()
 
@@ -18,14 +19,23 @@ def lookup_tweets(tweet_ids, api):
 
 def annotate_tweets(tweet_ids, event_name, start_index, api):
     status = lookup_tweets(tweet_ids, api)
-    with open(event_name + "-" + str(start_index), "w") as annotated:
+    json_list = []
+    with open(event_name + "-" + str(start_index) + ".json", "w") as annotated:
         for tweet in status:
+            curr_tweet = {}
             print("ID: ", tweet.id_str)
             print("Tweet: ", tweet.text)
             annotation = input("Annotate (0: Not relevant, 1: Relevant, 2: Informative): ")
             if int(annotation) < 0 or int(annotation) > 2:
                 annotation = input("Try again: ")
-            annotated.write(tweet.id_str + "," + annotation + "\n")
+            curr_tweet["annotation"] = annotation
+            curr_tweet["tweet_id"] = tweet.id_str
+            curr_tweet["text"] = tweet.text
+            curr_tweet["name"] = tweet.author.name
+            curr_tweet["screen_name"] = tweet.author.screen_name
+            curr_tweet["profile_img"] = tweet.author.profile_image_url_https
+            json_list.append(curr_tweet)
+        json.dump(json_list, annotated)
     return True
 
 def main():
