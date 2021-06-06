@@ -26,7 +26,7 @@ def annotate_tweets(tweet_ids, event_name, start_index, api):
             print("ID: ", tweet.id_str)
             print("Tweet: ", tweet.text)
             annotation = input("Annotate (0: Not relevant, 1: Relevant, 2: Informative): ")
-            if int(annotation) < 0 or int(annotation) > 2:
+            if not annotation or int(annotation) < 0 or int(annotation) > 2:
                 annotation = input("Try again: ")
             curr_tweet["annotation"] = annotation
             curr_tweet["tweet_id"] = tweet.id_str
