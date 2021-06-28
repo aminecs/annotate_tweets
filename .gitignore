@@ -2,3 +2,6 @@
 *.ids
 .vscode/
 *.ids*
+.DS_Store
+*.json
+*.ipynb
